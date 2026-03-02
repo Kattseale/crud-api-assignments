@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assignments CRUD</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.3.3/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-gray-100 min-h-screen p-4">
+
+  <div class="max-w-3xl mx-auto">
+
+    <h1 class="text-3xl font-bold mb-6 text-center">Assignments CRUD</h1>
+
+    <!-- Form for Create / Update -->
+    <div class="mb-6 p-4 bg-white shadow rounded">
+      <h2 class="font-semibold mb-2" id="formTitle">Add New Assignment</h2>
+      <input type="text" id="studentName" placeholder="Student Name" class="border p-2 mb-2 w-full rounded">
+      <input type="text" id="title" placeholder="Title" class="border p-2 mb-2 w-full rounded">
+      <input type="text" id="content" placeholder="Content" class="border p-2 mb-2 w-full rounded">
+      <div class="flex space-x-2">
+        <button id="saveBtn" class="bg-blue-500 text-white px-4 py-2 rounded flex-1">Save</button>
+        <button id="cancelBtn" class="bg-gray-400 text-white px-4 py-2 rounded flex-1 hidden">Cancel</button>
+      </div>
+    </div>
+
+    <!-- Assignments List -->
+    <div id="assignmentsList" class="space-y-4"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
