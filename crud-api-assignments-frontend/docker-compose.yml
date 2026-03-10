@@ -1,0 +1,32 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: crud_db
+    restart: always
+    environment:
+      POSTGRES_USER: katt
+      POSTGRES_PASSWORD: 1224sql
+      POSTGRES_DB: crud_api
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    container_name: crud_app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_USER: katt
+      DB_PASSWORD: 1224sql
+      DB_NAME: crud_api
+      DB_PORT: 5432
+
+volumes:
+  postgres_data:

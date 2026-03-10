@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000/assignments"; // your backend
+const API_URL = "http://localhost:3000/assignments"; // backend
 
 const assignmentsList = document.getElementById("assignmentsList");
 const saveBtn = document.getElementById("saveBtn");
@@ -19,9 +19,11 @@ async function fetchAssignments() {
 
     div.innerHTML = `
       <div>
-        <p class="font-semibold">${a.studentName} - ${a.title}</p>
+        <p class="font-semibold">${a.studentname} - ${a.title}</p>
         <p>${a.content}</p>
-        <p class="text-sm text-gray-500">Created: ${new Date(a.createdat).toLocaleString()}</p>
+        <p class="text-sm text-gray-500">
+Created: ${a.createdat ? new Date(a.createdat).toLocaleString() : ""}
+</p>
       </div>
       <div class="flex space-x-2 mt-2 md:mt-0">
         <button class="bg-green-500 text-white px-2 py-1 rounded" onclick="editAssignment('${a.id}')">Edit</button>
@@ -35,17 +37,17 @@ async function fetchAssignments() {
 
 // Save or update assignment
 async function saveAssignment() {
-  const studentName = document.getElementById("studentName").value;
+  const studentname = document.getElementById("studentname").value;
   const title = document.getElementById("title").value;
   const content = document.getElementById("content").value;
 
-  if (!studentName || !title || !content) return alert("Please fill all fields");
+  if (!studentname || !title || !content) return alert("Please fill all fields");
 
   if (editId) {
     await fetch(`${API_URL}/${editId}`, {
       method: "PUT",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({studentName, title, content})
+      body: JSON.stringify({studentname, title, content})
     });
     editId = null;
     saveBtn.textContent = "Save";
@@ -55,7 +57,7 @@ async function saveAssignment() {
     await fetch(API_URL, {
       method: "POST",
       headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({studentName, title, content})
+      body: JSON.stringify({studentname, title, content})
     });
   }
 
@@ -75,7 +77,7 @@ async function editAssignment(id) {
   const res = await fetch(`${API_URL}/${id}`);
   const data = await res.json();
 
-  document.getElementById("studentName").value = data.studentName;
+  document.getElementById("studentname").value = data.studentname;
   document.getElementById("title").value = data.title;
   document.getElementById("content").value = data.content;
 
@@ -96,7 +98,7 @@ cancelBtn.addEventListener("click", () => {
 
 // Clear form fields
 function clearForm() {
-  document.getElementById("studentName").value = "";
+  document.getElementById("studentname").value = "";
   document.getElementById("title").value = "";
   document.getElementById("content").value = "";
 }
