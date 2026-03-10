@@ -81,36 +81,33 @@ app.get('/assignments', async (req, res) => {
 /**
  * @swagger
  * /assignments:
- * post:
- * summary: Create a new assignment
- * tags: [Assignments]
- * requestBody:
- * required: true
- * content:
- * application/json:
- * schema:
- * type: object
- * required:
- * - studentname
- * - title
- * - content
- * properties:
- * studentname:
- * type: string
- * title:
- * type: string
- * content:
- * type: string
- * responses:
- * 201:
- * description: Assignment created successfully
- * 400:
- * description: Missing required fields
- * 500:
- * description: Server error    
+ *   post:
+ *     summary: Create a new assignment
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - studentname
+ *               - title
+ *               - content
+ *             properties:
+ *               studentname:
+ *                 type: string
+ *               title:
+ *                 type: string
+ *               content:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Assignment created successfully
+ *       400:
+ *         description: Missing required fields
  */
-  app.post('/assignments', async (req, res) => {
-  const { studentname, title, content } = req.body; 
+app.post('/assignments', async (req, res) => {
+  const { studentname, title, content } = req.body;
 
   try {
     const result = await pool.query(
